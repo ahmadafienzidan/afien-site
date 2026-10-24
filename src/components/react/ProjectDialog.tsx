@@ -46,6 +46,9 @@ export default function ProjectDialog({
 				history.replaceState(null, "", location.pathname);
 				onClose();
 			}}
+			onClick={(e) => {
+				if (e.target === e.currentTarget) ref.current?.close();
+			}}
 			onKeyDown={(e) => {
 				if (e.key === "ArrowRight") setIndex(stepIndex(index, total, 1));
 				if (e.key === "ArrowLeft") setIndex(stepIndex(index, total, -1));
