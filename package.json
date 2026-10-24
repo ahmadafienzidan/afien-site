@@ -31,6 +31,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@biomejs/biome": "^2.6.2",
+    "sharp": "^0.35.5",
     "typescript": "6",
     "vitest": "^5.0.5"
   }
