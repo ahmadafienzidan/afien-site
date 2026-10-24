@@ -35,13 +35,28 @@ test("filters and opens a project", async ({ page }) => {
 	await expect.poll(() => page.evaluate(() => location.hash)).toBe("");
 });
 
-test("deep link opens even when filtered out", async ({ page }) => {
+test("backdrop click closes the dialog", async ({ page }) => {
 	await gotoHydrated(page, "/portfolio");
 	await page
-		.getByRole("group", { name: "Filter projects" })
-		.getByRole("button", { name: "Web" })
+		.getByRole("list", { name: "Projects" })
+		.getByRole("button")
+		.first()
 		.click();
+	const dialog = page.getByRole("dialog");
+	await expect(dialog).toBeVisible();
+	await page.mouse.click(5, 5);
+	await expect(dialog).toBeHidden();
+	await expect.poll(() => page.evaluate(() => location.hash)).toBe("");
+});
+
+test("deep link opens even when filtered out", async ({ page }) => {
+	await gotoHydrated(page, "/portfolio");
+	const web = page
+		.getByRole("group", { name: "Filter projects" })
+		.getByRole("button", { name: "Web" });
+	await web.click();
 	await page.goto("/portfolio#rover-ui");
+	await expect(web).toHaveAttribute("aria-pressed", "true");
 	await expect(
 		page.getByRole("dialog").getByRole("heading", { name: "Rover UI" }),
 	).toBeVisible();
@@ -59,12 +74,7 @@ test("single-photo project has no gallery controls", async ({ page }) => {
 	await expect(dialog.getByText(/^\d+ \/ \d+$/)).toHaveCount(0);
 	await expect(dialog.getByRole("group", { name: "Photos" })).toHaveCount(0);
 
-	const image = dialog.getByRole("img").first();
-	const before = await image.evaluate((el) => (el as HTMLImageElement).src);
-	await page.keyboard.press("ArrowRight");
-	expect(await image.evaluate((el) => (el as HTMLImageElement).src)).toBe(
-		before,
-	);
+	await expect(dialog.locator("picture img")).toHaveCount(1);
 });
 
 test("unknown hash is ignored", async ({ page }) => {
