@@ -142,7 +142,7 @@ const projects = await Promise.all(
 			class="mx-auto flex max-w-[1280px] flex-wrap gap-10 px-6 pt-14 pb-[72px]"
 		>
 			<div class="flex min-w-0 flex-[999_1_640px] flex-col">
-				<ProjectBrowser client:load projects={projects} />
+				<ProjectBrowser client:idle projects={projects} />
 			</div>
 			<aside
 				class="flex flex-[1_1_260px] flex-col justify-center gap-5 border-line min-[960px]:border-l min-[960px]:pl-8"
