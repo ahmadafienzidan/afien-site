@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "@fontsource/titan-one/400.css";
+@import "@fontsource/permanent-marker/400.css";
+
+@font-face {
+	font-family: "Excalifont";
+	src: url("/fonts/Excalifont-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@theme {
+	--color-cream: #f4f1ea;
+	--color-ink: #111111;
+	--color-muted: #4a4741;
+	--color-line: #d4d1cb;
+	--color-orange: #ff6b1a;
+	--color-blue: #2f5bff;
+	--color-sky: #bfd0ff;
+	--color-periwinkle: #7e9bff;
+	--color-yellow: #ffd21f;
+	--color-sand: #d9d5ce;
+
+	--font-display: "Titan One", system-ui, sans-serif;
+	--font-marker: "Permanent Marker", system-ui, cursive;
+	--font-body: "Excalifont", system-ui, sans-serif;
+}
+
+body {
+	@apply bg-cream text-ink font-body font-normal;
+}
+
+@utility bg-dots {
+	background-image: radial-gradient(
+		rgba(17, 17, 17, 0.12) 1.2px,
+		transparent 1.4px
+	);
+	background-size: 20px 20px;
+}
