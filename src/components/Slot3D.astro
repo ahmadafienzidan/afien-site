@@ -1,8 +1,9 @@
 ---
 import { Picture } from "astro:assets";
+import type { ModelName } from "./react/scene/models";
 
 interface Props {
-	model: string;
+	model: ModelName;
 	fallback: ImageMetadata;
 	alt: string;
 	class?: string;

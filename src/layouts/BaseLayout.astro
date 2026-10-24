@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import SceneHost from "../components/react/scene/SceneHost";
 import type { NAV } from "../data/site";
 
 interface Props {
@@ -40,7 +41,7 @@ const imageUrl = new URL(image, Astro.site);
 	</head>
 	<body class="bg-dots">
 		<div class="min-h-screen overflow-x-hidden text-[19px] leading-normal">
-			<slot name="scene" />
+			<slot name="scene"><SceneHost client:idle /></slot>
 			<Header current={current} />
 			<main>
 				<slot />

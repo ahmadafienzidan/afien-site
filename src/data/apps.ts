@@ -1,9 +1,11 @@
+import type { ModelName } from "../components/react/scene/models";
+
 export const APPS: {
 	name: string;
 	blurb: string;
 	href: string | null;
 	tone: "orange" | "blue" | "yellow" | "white";
-	model: string;
+	model: ModelName;
 	badge?: string;
 }[] = [
 	{

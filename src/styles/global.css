@@ -31,6 +31,10 @@ body {
 	@apply bg-cream text-ink font-body font-normal;
 }
 
+[data-3d-active] [data-3d-fallback] {
+	display: none;
+}
+
 @utility bg-dots {
 	background-image: radial-gradient(
 		rgba(17, 17, 17, 0.12) 1.2px,
