@@ -76,7 +76,14 @@ const Tag = href ? "a" : "div";
 		}
 		{
 			note && (
-				<span class="-rotate-6 font-marker text-lg text-ink">{note}</span>
+				<span
+					class:list={[
+						"-rotate-6 font-marker text-lg",
+						tone === "blue" ? "text-white" : "text-ink",
+					]}
+				>
+					{note}
+				</span>
 			)
 		}
 	</span>
