@@ -1,0 +1,46 @@
+---
+import { NAV } from "../data/site";
+
+interface Props {
+	current: (typeof NAV)[number]["id"];
+}
+
+const { current } = Astro.props;
+---
+
+<header
+	class="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 border-b border-line px-6 py-5"
+>
+	<a href="/" class="font-display text-[26px] tracking-[0.04em]">AFIEN</a>
+	<nav aria-label="Main" class="flex flex-wrap gap-7 text-base">
+		{
+			NAV.map((item) => (
+				<a
+					href={item.href}
+					aria-current={item.id === current ? "page" : undefined}
+					class:list={[
+						"border-b-2 py-3 hover:text-blue",
+						item.id === current ? "border-orange" : "border-transparent",
+					]}
+				>
+					{item.label}
+				</a>
+			))
+		}
+	</nav>
+	<a
+		href="/#contact"
+		class="inline-flex min-h-11 items-center gap-2.5 rounded-[10px] bg-ink px-5 text-base text-white hover:text-white hover:opacity-85"
+	>
+		Contact
+		<svg
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+		>
+	</a>
+</header>

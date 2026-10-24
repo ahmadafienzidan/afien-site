@@ -1,0 +1,63 @@
+---
+interface Props {
+	items: string[];
+	tone: "ink" | "accent";
+	tilt?: number;
+}
+
+const { items, tone, tilt = -1.5 } = Astro.props;
+
+const stars =
+	tone === "ink"
+		? ["fill-orange", "fill-yellow", "fill-periwinkle"]
+		: ["fill-ink", "fill-cream", "fill-yellow"];
+const track = [...items, ...items];
+---
+
+<div
+	aria-hidden="true"
+	class:list={[
+		"-mx-6 my-6 overflow-hidden py-3.5",
+		tone === "ink" ? "bg-ink text-cream" : "bg-orange text-ink",
+	]}
+	style={`transform:rotate(${tilt}deg)`}
+>
+	<div
+		class="marquee-track flex w-max items-center font-display text-[28px] tracking-[0.04em] whitespace-nowrap"
+	>
+		{
+			track.map((item, i) => (
+				<span class="flex items-center gap-7 pr-7">
+					{item}
+					<svg
+						width="24"
+						height="24"
+						viewBox="0 0 48 48"
+						class={stars[i % items.length % stars.length]}
+					>
+						<path d="M24 2c2 12 10 20 22 22-12 2-20 10-22 22-2-12-10-20-22-22 12-2 20-10 22-22z" />
+					</svg>
+				</span>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.marquee-track {
+		animation: marquee 28s linear infinite;
+	}
+	@keyframes marquee {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.marquee-track {
+			animation: none;
+		}
+	}
+</style>

@@ -1,0 +1,23 @@
+---
+import type { DoodleKind } from "../data/site";
+import Doodle from "./Doodle.astro";
+
+interface Props {
+	id: string;
+	doodle?: DoodleKind;
+}
+
+const { id, doodle } = Astro.props;
+---
+
+<h2 id={id} class="text-4xl leading-[1.1] font-bold">
+	<slot />
+	{
+		doodle && (
+			<Doodle
+				kind={doodle}
+				class="ml-2 inline-block h-9 w-auto align-middle"
+			/>
+		)
+	}
+</h2>

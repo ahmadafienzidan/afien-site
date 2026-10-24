@@ -1,0 +1,31 @@
+---
+interface Props {
+	text: string;
+	size?: number;
+	rotate?: number;
+}
+
+const { text, size = 132, rotate = 10 } = Astro.props;
+---
+
+<div
+	class="relative flex items-center justify-center"
+	style={`width:${size}px;height:${size}px;transform:rotate(${rotate}deg)`}
+>
+	<svg
+		viewBox="0 0 100 100"
+		aria-hidden="true"
+		class="absolute inset-0 h-full w-full"
+	>
+		<path
+			d="M50 2l9 16 18-6 1 19 18 5-9 16 12 14-18 6 2 19-19-2-8 17-14-12-14 12-7-17-19 2 2-19-18-6 12-14-9-16 18-5 1-19 18 6z"
+			class="fill-yellow stroke-ink"
+			stroke-width="2"></path>
+	</svg>
+	<p
+		class="relative text-center font-marker leading-[1.05] whitespace-pre-line"
+		style={`font-size:${Math.round(size * 0.13)}px`}
+	>
+		{text}
+	</p>
+</div>

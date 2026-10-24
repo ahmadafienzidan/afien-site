@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import type { NAV } from "../data/site";
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	current: (typeof NAV)[number]["id"];
+}
+
+const { title, description, image = "/og.png", current } = Astro.props;
+
+const fullTitle = `${title} · Ahmad 'Afien Zidan`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Ahmad 'Afien Zidan" />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={imageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={fullTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
+	</head>
+	<body class="bg-dots">
+		<div class="min-h-screen overflow-x-hidden text-[19px] leading-normal">
+			<slot name="scene" />
+			<Header current={current} />
+			<main>
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>

@@ -1,0 +1,81 @@
+---
+import type { DoodleKind } from "../data/site";
+
+interface Props {
+	kind: DoodleKind;
+	class?: string;
+}
+
+const { kind, class: className } = Astro.props;
+---
+
+{
+	kind === "star" && (
+		<svg
+			viewBox="0 0 48 48"
+			aria-hidden="true"
+			class:list={["fill-yellow stroke-ink", className]}
+			stroke-width="2.5"
+		>
+			<path d="M24 2c2 12 10 20 22 22-12 2-20 10-22 22-2-12-10-20-22-22 12-2 20-10 22-22z" />
+		</svg>
+	)
+}
+{
+	kind === "spark" && (
+		<svg
+			viewBox="0 0 48 48"
+			aria-hidden="true"
+			fill="none"
+			stroke-linecap="round"
+			stroke-width="3"
+			class:list={["stroke-orange", className]}
+		>
+			<path d="M24 6v36M6 24h36M11 11l26 26M37 11L11 37" />
+		</svg>
+	)
+}
+{
+	kind === "squiggle" && (
+		<svg
+			viewBox="0 0 72 20"
+			aria-hidden="true"
+			fill="none"
+			stroke-linecap="round"
+			stroke-width="3"
+			class:list={["stroke-orange", className]}
+		>
+			<path d="M2 14c10-12 18-12 22 0s14 6 22-6 14-4 24 4" />
+		</svg>
+	)
+}
+{
+	kind === "smiley" && (
+		<svg
+			viewBox="0 0 48 48"
+			aria-hidden="true"
+			fill="none"
+			stroke-linecap="round"
+			stroke-width="2.5"
+			class:list={["stroke-ink", className]}
+		>
+			<circle cx="24" cy="24" r="20" class="fill-yellow" />
+			<path d="M17 19v3M31 19v3M15 29c5 6 13 6 18 0" />
+		</svg>
+	)
+}
+{
+	kind === "arrow" && (
+		<svg
+			viewBox="0 0 44 28"
+			aria-hidden="true"
+			fill="none"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			stroke-width="2.5"
+			class:list={["stroke-ink", className]}
+		>
+			<path d="M42 20C30 26 14 24 6 10M6 10l-2 9M6 10l9 1" />
+		</svg>
+	)
+}

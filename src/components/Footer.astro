@@ -1,0 +1,21 @@
+---
+import { NAV } from "../data/site";
+---
+
+<footer class="border-t border-line">
+	<div
+		class="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-6 py-8 text-[15px]"
+	>
+		<p class="font-display text-[22px]">AFIEN</p>
+		<p class="text-muted">© 2026 Ahmad ‘Afien Zidan. Made in Surabaya.</p>
+		<nav aria-label="Footer" class="flex flex-wrap gap-5">
+			{
+				NAV.map((item) => (
+					<a href={item.href} class="py-3 hover:text-blue">
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+</footer>
