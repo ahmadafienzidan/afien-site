@@ -1,0 +1,103 @@
+---
+import { Picture } from "astro:assets";
+import orange from "../assets/placeholders/orange.png";
+import sand from "../assets/placeholders/sand.png";
+import sky from "../assets/placeholders/sky.png";
+import yellow from "../assets/placeholders/yellow.png";
+import AppCard from "../components/AppCard.astro";
+import Doodle from "../components/Doodle.astro";
+import Marquee from "../components/Marquee.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import { APPS } from "../data/apps";
+import { CONTACT } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const fallbacks: Record<string, ImageMetadata> = {
+	"app-shapeshift": yellow,
+	"app-nextstep": sky,
+	"app-soon": orange,
+	"app-github": sand,
+};
+const pill =
+	"inline-flex min-h-11 items-center gap-2 rounded-full px-[18px] border-[1.5px] border-ink";
+---
+
+<BaseLayout
+	title="Links"
+	description="Apps I built and places to find Ahmad ‘Afien Zidan online."
+	current="links"
+>
+	<main class="mx-auto flex max-w-[960px] flex-col gap-12 px-6 pt-14 pb-20">
+		<div class="relative flex flex-col items-center gap-4 text-center">
+			<Picture
+				src={sand}
+				alt=""
+				formats={["avif", "webp"]}
+				widths={[400, 800]}
+				sizes="112px"
+				class="h-28 w-28 rounded-full border-[3px] border-ink bg-sand object-cover"
+			/>
+			<h1
+				class="-rotate-2 font-display text-[clamp(56px,8vw,104px)] leading-[0.9] font-normal text-orange [-webkit-text-stroke:4px_#111111] [paint-order:stroke_fill] [text-shadow:6px_6px_0_#111111]"
+			>
+				MY APPS
+			</h1>
+			<p class="font-marker text-[22px]">Things I made — go try them :)</p>
+			<Doodle kind="star" class="absolute top-6 right-[12%] h-14 w-14" />
+			<Doodle
+				kind="smiley"
+				class="absolute top-12 left-[12%] h-14 w-14 -rotate-12"
+			/>
+			<Doodle
+				kind="squiggle"
+				class="absolute right-[8%] bottom-6 hidden h-10 w-[72px] sm:block"
+			/>
+		</div>
+
+		<section aria-labelledby="apps" class="flex flex-col gap-4">
+			<SectionTitle id="apps" doodle="squiggle">Live apps</SectionTitle>
+			<div class="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
+				{
+					APPS.map((app) => (
+						<AppCard {...app} fallback={fallbacks[app.model]} />
+					))
+				}
+			</div>
+		</section>
+
+		<section
+			aria-labelledby="elsewhere"
+			class="flex flex-wrap items-center justify-between gap-6 rounded-3xl border border-line bg-white p-7"
+		>
+			<div class="flex flex-col gap-1">
+				<h2 id="elsewhere" class="text-[22px] font-bold">Find me elsewhere</h2>
+				<p class="text-muted">Say hi, follow along, or check the code.</p>
+			</div>
+			<div class="flex flex-wrap gap-2.5">
+				<a href={CONTACT.linkedin} class:list={[pill]}>LinkedIn</a>
+				<a href={CONTACT.github} class:list={[pill]}>GitHub</a>
+				<a href={CONTACT.gitlab} class:list={[pill]}>GitLab</a>
+				<a
+					href={`mailto:${CONTACT.email}`}
+					class:list={[pill, "bg-ink text-white hover:text-white hover:opacity-85"]}
+				>
+					Email
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+					>
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<Marquee
+		tone="ink"
+		items={["TRY MY APPS", "SHARE THEM", "MADE IN SURABAYA", "MORE COMING"]}
+	/>
+</BaseLayout>
