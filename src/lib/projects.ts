@@ -1,4 +1,4 @@
-import type { ProjectKind } from "../types/project";
+import type { ProjectKind, Tint } from "../types/project";
 
 export const KIND_ORDER: readonly ProjectKind[] = ["web", "work", "ev"];
 
@@ -6,6 +6,15 @@ export const KIND_LABEL: Record<ProjectKind, string> = {
 	web: "Web",
 	work: "Work",
 	ev: "EV",
+};
+
+export const TINT_BG: Record<Tint, string> = {
+	orange: "bg-orange",
+	blue: "bg-blue",
+	sky: "bg-sky",
+	periwinkle: "bg-periwinkle",
+	yellow: "bg-yellow",
+	sand: "bg-sand",
 };
 
 export function sortProjects<T extends { order: number; title: string }>(
