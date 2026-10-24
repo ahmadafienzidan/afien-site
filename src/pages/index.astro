@@ -1,5 +1,33 @@
 ---
+import { existsSync } from "node:fs";
+import { Picture } from "astro:assets";
+import placeholder from "../assets/placeholders/yellow.png";
+import portrait from "../assets/profile/portrait.png";
+import AwardCard from "../components/AwardCard.astro";
+import Doodle from "../components/Doodle.astro";
+import ExperienceCard from "../components/ExperienceCard.astro";
+import Marquee from "../components/Marquee.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import SkillPill from "../components/SkillPill.astro";
+import Slot3D from "../components/Slot3D.astro";
+import Sticker from "../components/Sticker.astro";
+import {
+	AWARDS,
+	EDUCATION,
+	EXPERIENCE,
+	HERO_STATS,
+	SKILLS,
+} from "../data/profile";
+import { CONTACT } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const hasCv = existsSync("public/cv.pdf");
+const outlined =
+	"[-webkit-text-stroke:3px_#111111] [paint-order:stroke_fill] [text-shadow:4px_4px_0_#111111]";
+const btn =
+	"inline-flex min-h-12 items-center gap-2.5 rounded-[10px] px-6 text-base";
+const row =
+	"inline-flex min-h-[52px] items-center justify-between gap-3 rounded-xl px-6";
 ---
 
 <BaseLayout
@@ -7,6 +35,368 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	description="Ahmad 'Afien Zidan, a software engineer in Surabaya building production web apps with React and TypeScript."
 	current="home"
 >
-	<h1 class="font-display text-orange">HI, I'M AFIEN</h1>
-	<p>body</p>
+	<section
+		class="mx-auto flex max-w-[1280px] flex-wrap items-end gap-10 px-6 pt-12"
+	>
+		<div class="relative flex min-w-0 flex-[1_1_480px] flex-col gap-6 pb-12">
+			<p class="font-marker text-[26px] leading-[1.1]">
+				From electric vehicles<br />to the web
+			</p>
+			<Doodle kind="star" class="absolute -top-2 left-[300px] h-14 w-14" />
+			<h1
+				class="-rotate-3 font-display text-[clamp(64px,10vw,148px)] leading-[0.9] font-normal tracking-[-0.01em] text-orange [-webkit-text-stroke:4px_#111111] [paint-order:stroke_fill] [text-shadow:6px_6px_0_#111111]"
+			>
+				HI, I’M<br />AFIEN
+			</h1>
+			<p class="max-w-[440px] text-base">
+				I’m Ahmad ‘Afien Zidan, a software engineer at Formulatrix
+				Indonesia. I build production web apps with React and TypeScript —
+				interactive maps, canvas editors, and tools people use every day.
+			</p>
+			<div class="flex flex-wrap items-center gap-3">
+				<a
+					href="/portfolio"
+					class:list={[
+						btn,
+						"bg-ink text-white hover:text-white hover:opacity-85",
+					]}
+				>
+					See my work
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+					>
+				</a>
+				{
+					hasCv && (
+						<a
+							href="/cv.pdf"
+							download
+							class:list={[btn, "border-[1.5px] border-ink"]}
+						>
+							<svg
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								aria-hidden="true"
+							>
+								<path d="M12 4v12M6 11l6 6 6-6M5 20h14" />
+							</svg>
+							Download CV
+						</a>
+					)
+				}
+				<span
+					class="inline-flex -rotate-4 items-center gap-1.5 font-marker text-lg"
+				>
+					<Doodle kind="arrow" class="h-7 w-11" />start here
+				</span>
+			</div>
+			<div class="mt-4 flex flex-wrap gap-6">
+				{
+					HERO_STATS.map((stat) => (
+						<div class="border-r border-[#C9C5BD] pr-6">
+							<p class="text-[32px] leading-none">{stat.value}</p>
+							<p class="mt-1 text-[15px] text-muted">{stat.label}</p>
+						</div>
+					))
+				}
+				<div class="flex items-center gap-2.5">
+					<svg
+						width="28"
+						height="28"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						aria-hidden="true"
+					>
+						<path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z" />
+						<circle cx="12" cy="9" r="2.5" />
+					</svg>
+					<p class="text-[15px] leading-[1.3]">Surabaya,<br />Indonesia</p>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="relative flex min-h-[560px] min-w-0 flex-[1_1_480px] items-end justify-center"
+		>
+			<svg
+				viewBox="0 0 400 400"
+				aria-hidden="true"
+				class="absolute top-6 right-0 w-[78%] max-w-[440px]"
+			>
+				<path
+					d="M210 20c60-10 120 30 150 90s20 140-30 190-140 80-210 50S10 250 30 170 150 30 210 20z"
+					fill="#2F5BFF"
+					stroke="#111111"
+					stroke-width="3"></path>
+				<ellipse
+					cx="300"
+					cy="90"
+					rx="22"
+					ry="10"
+					fill="#FFFFFF"
+					opacity="0.6"
+					transform="rotate(-30 300 90)"></ellipse>
+			</svg>
+			<Picture
+				src={portrait}
+				alt="Portrait of Ahmad ‘Afien Zidan"
+				formats={["avif", "webp"]}
+				widths={[400, 800, 1200, 1600]}
+				sizes="(min-width: 1280px) 420px, 78vw"
+				loading="eager"
+				class="relative aspect-[4/5] w-full rounded-t-3xl border-[3px] border-b-0 border-ink bg-sand object-cover"
+				pictureAttributes={{
+					class: "relative block w-[78%] max-w-[420px]",
+				}}
+			/>
+			<Slot3D
+				model="hero"
+				fallback={placeholder}
+				alt=""
+				class="absolute bottom-6 left-0 h-[180px] w-[180px] -rotate-8 overflow-hidden rounded-[32px] border-2 border-dashed border-ink bg-white/70"
+			/>
+			<div class="absolute top-0 right-0">
+				<Sticker text={"Ship it\nwith\nstyle"} size={132} rotate={10} />
+			</div>
+			<p
+				class="absolute top-20 left-0 -rotate-10 font-marker text-2xl leading-[1.05]"
+			>
+				React,<br />TS &amp;<br />a bit of C#
+			</p>
+			<p
+				class="absolute -right-2 bottom-[120px] -rotate-12 font-marker text-[22px] leading-[1.05]"
+			>
+				Maps,<br />canvas,<br />real code
+			</p>
+		</div>
+	</section>
+
+	<Marquee
+		tone="ink"
+		items={[
+			"REACT & TYPESCRIPT",
+			"FROM EVs TO THE WEB",
+			"SURABAYA BASED",
+			"GOOD CODE, GOOD MOOD",
+		]}
+	/>
+
+	<section aria-labelledby="about" class="border-t border-line">
+		<div
+			class="mx-auto flex max-w-[1280px] flex-wrap items-center gap-10 px-6 py-[72px]"
+		>
+			<div
+				class="relative flex aspect-[16/10] min-w-0 flex-[1_1_360px] items-center justify-center rounded-[20px] bg-yellow"
+			>
+				<p
+					class:list={[
+						"-rotate-4 text-center font-display text-[clamp(40px,5vw,64px)] leading-[0.95] text-blue",
+						outlined,
+					]}
+				>
+					CODE.<br />CREATE.<br />REPEAT.
+				</p>
+				<svg
+					width="64"
+					height="40"
+					viewBox="0 0 64 40"
+					fill="none"
+					stroke="#111111"
+					stroke-width="3"
+					stroke-linecap="round"
+					aria-hidden="true"
+					class="absolute bottom-6 left-6"
+					><path d="M4 30c8-20 14-20 16 0s10 0 16-20 12 0 24 10"></path></svg
+				>
+			</div>
+			<div class="flex min-w-0 flex-[999_1_480px] flex-col gap-4">
+				<SectionTitle id="about" doodle="spark">About me</SectionTitle>
+				<p class="text-xl leading-normal">
+					I’m an Electrical Engineering graduate turned software engineer.
+					Today I build production web apps at Formulatrix Indonesia with
+					React, TypeScript and a bit of C#. Before that, I designed the
+					electrical systems for award-winning electric motorcycles and
+					helped run a 275+ vehicle EV conversion program.
+				</p>
+				<p class="text-muted">
+					I love interfaces that feel solid and fast: interactive maps,
+					canvas editors, quick builds. B.Eng from Airlangga University (GPA
+					3.72/4.00).
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section aria-labelledby="experience" class="border-t border-line">
+		<div class="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 py-[72px]">
+			<SectionTitle id="experience" doodle="squiggle">Experience</SectionTitle>
+			<div class="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
+				{EXPERIENCE.map((job) => <ExperienceCard {...job} />)}
+			</div>
+		</div>
+	</section>
+
+	<section aria-labelledby="skills" class="border-t border-line">
+		<div class="mx-auto flex max-w-[1280px] flex-wrap gap-10 px-6 py-[72px]">
+			<div class="flex min-w-0 flex-[999_1_560px] flex-col gap-6">
+				<SectionTitle id="skills">Skills &amp; tools</SectionTitle>
+				<ul class="flex flex-wrap gap-2.5">
+					{SKILLS.map((skill) => <SkillPill {...skill} />)}
+				</ul>
+				<h3 class="mt-4 text-[22px] font-bold">Education</h3>
+				<div
+					class="flex flex-wrap items-center gap-x-6 gap-y-4 rounded-2xl bg-white p-5"
+				>
+					<span
+						class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-sky"
+					>
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="#111111"
+							stroke-width="1.8"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M2 9l10-5 10 5-10 5z"></path>
+							<path d="M6 11v5c3 2 9 2 12 0v-5"></path>
+						</svg>
+					</span>
+					<div class="flex-[1_1_260px]">
+						<p>{EDUCATION.degree}</p>
+						<p class="text-muted">{EDUCATION.school}</p>
+					</div>
+					<p class="rounded-full bg-cream px-3.5 py-1.5 text-[15px]">
+						{EDUCATION.period}
+					</p>
+				</div>
+				<h3 class="mt-4 text-[22px] font-bold">
+					Awards
+					<Doodle kind="star" class="inline-block h-7 w-7 align-middle" />
+				</h3>
+				<div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+					{AWARDS.map((award) => <AwardCard {...award} />)}
+				</div>
+			</div>
+			<aside
+				class="flex flex-[1_1_280px] flex-col justify-center gap-5 border-line md:border-l md:pl-8"
+			>
+				<p class="-rotate-6 font-marker text-[44px] leading-none">
+					Good code,<br />good mood :)
+				</p>
+				<Doodle kind="smiley" class="h-16 w-16 rotate-12" />
+				<p class="text-muted">
+					Always learning something new. Currently: AI-powered apps and the
+					MERN stack.
+				</p>
+			</aside>
+		</div>
+	</section>
+
+	<section
+		id="contact"
+		aria-labelledby="contact-title"
+		class="border-t border-line"
+	>
+		<div class="mx-auto max-w-[1280px] px-6 py-[72px]">
+			<div
+				class="relative flex flex-wrap items-center justify-between gap-8 rounded-3xl bg-sky p-[clamp(32px,5vw,64px)]"
+			>
+				<div class="absolute -top-9 right-10">
+					<Sticker text={"Say\nhi!"} size={112} rotate={12} />
+				</div>
+				<svg
+					width="72"
+					height="40"
+					viewBox="0 0 72 40"
+					fill="none"
+					stroke="#111111"
+					stroke-width="3"
+					stroke-linecap="round"
+					aria-hidden="true"
+					class="absolute bottom-5 left-8"
+					><path d="M4 30c8-20 14-20 16 0s10 0 16-20 12 0 24 10"></path></svg
+				>
+				<div class="flex min-w-0 flex-[999_1_480px] flex-col gap-3">
+					<p class="text-[15px] tracking-[0.1em] uppercase">
+						Let’s talk // 2026
+					</p>
+					<h2
+						id="contact-title"
+						class:list={[
+							"font-display text-[clamp(44px,6vw,84px)] leading-[0.95] font-normal text-blue",
+							outlined,
+						]}
+					>
+						BUILD IT<br />TOGETHER.
+					</h2>
+				</div>
+				<div class="flex flex-[1_1_280px] flex-col gap-3">
+					<a
+						href={`mailto:${CONTACT.email}`}
+						class:list={[
+							row,
+							"bg-ink text-white [overflow-wrap:anywhere] hover:text-white hover:opacity-85",
+						]}
+					>
+						{CONTACT.email}
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							aria-hidden="true"
+							class="flex-none"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+						>
+					</a>
+					<a
+						href={CONTACT.linkedin}
+						class:list={[row, "border-[1.5px] border-ink bg-white"]}
+					>
+						LinkedIn
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg
+						>
+					</a>
+					<a
+						href="/links"
+						class:list={[row, "border-[1.5px] border-ink bg-white"]}
+					>
+						All my links
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+						>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
 </BaseLayout>

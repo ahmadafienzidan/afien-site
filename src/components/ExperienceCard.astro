@@ -1,0 +1,35 @@
+---
+interface Props {
+	period: string;
+	role: string;
+	company: string;
+	summary: string;
+	tone: "orange" | "blue" | "yellow" | "white";
+}
+
+const { period, role, company, summary, tone } = Astro.props;
+
+const card = {
+	orange: "bg-orange",
+	blue: "bg-blue text-white",
+	yellow: "bg-yellow",
+	white: "border-[1.5px] border-ink bg-white",
+}[tone];
+const chip = {
+	orange: "bg-white",
+	blue: "bg-white text-ink",
+	yellow: "bg-white",
+	white: "bg-ink text-white",
+}[tone];
+---
+
+<article
+	class:list={["flex min-h-[220px] flex-col gap-3 rounded-[20px] p-7", card]}
+>
+	<p class:list={["self-start rounded-full px-3.5 py-1.5 text-[15px]", chip]}>
+		{period}
+	</p>
+	<h3 class="text-2xl leading-[1.2] font-bold">{role}</h3>
+	<p>{company}</p>
+	<p>{summary}</p>
+</article>

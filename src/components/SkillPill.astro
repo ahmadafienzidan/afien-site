@@ -1,0 +1,17 @@
+---
+interface Props {
+	label: string;
+	highlight?: boolean;
+}
+
+const { label, highlight = false } = Astro.props;
+---
+
+<li
+	class:list={[
+		"rounded-full border-[1.5px] border-ink px-[18px] py-2.5",
+		highlight ? "bg-yellow" : "bg-white",
+	]}
+>
+	{label}
+</li>

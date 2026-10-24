@@ -1,0 +1,16 @@
+---
+interface Props {
+	badge: string;
+	title: string;
+	detail: string;
+	highlight?: boolean;
+}
+
+const { badge, title, detail, highlight = false } = Astro.props;
+---
+
+<div class:list={["rounded-2xl p-5", highlight ? "bg-yellow" : "bg-white"]}>
+	<p class="font-display text-4xl leading-none">{badge}</p>
+	<p class="mt-2">{title}</p>
+	<p class:list={[!highlight && "text-muted"]}>{detail}</p>
+</div>
