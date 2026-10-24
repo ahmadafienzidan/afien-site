@@ -11,7 +11,7 @@ interface Props {
 const { model, fallback, alt, class: className } = Astro.props;
 ---
 
-<div data-3d-slot={model} class:list={["relative", className]}>
+<div data-3d-slot={model} class:list={[className]}>
 	<Picture
 		src={fallback}
 		alt={alt}
